@@ -134,6 +134,11 @@ function addMeal(){
 }
 function delMeal(){
 	meals.pop();
+	var mealsString = [];
+	meals.forEach(function(n){
+		mealsString.push(JSON.stringify(n))
+	})
+	window.localStorage.setItem("meals", mealsString.join('-'))
 	checkGoal();
 	showGoal();
 	showEaten();
