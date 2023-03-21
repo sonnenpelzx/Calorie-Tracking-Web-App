@@ -53,6 +53,8 @@ function showEaten(){
 	const fatShow = document.querySelector('#fatMealShow');
 	const carbsShow = document.querySelector('#carbsMealShow');
 	const proteinShow = document.querySelector('#proteinMealShow');
+	const goalReached = "green"
+	const goalNotReached = "red"
 	var calories = 0;
 	var carbs = 0;
 	var fat = 0;
@@ -67,6 +69,22 @@ function showEaten(){
 	fatShow.innerHTML = fat.toFixed(2);
 	carbsShow.innerHTML = carbs.toFixed(2);
 	proteinShow.innerHTML = protein.toFixed(2);
+	if(inRange('calories', calories))
+		caloriesShow.style.color = goalReached
+	else
+		caloriesShow.style.color = goalNotReached
+	if(inRange('carbs', carbs) ) 
+		carbsShow.style.color = goalReached
+	else 
+		carbsShow.style.color = goalNotReached
+	if(inRange('fat', fat))
+		fatShow.style.color = goalReached
+	else 
+		fatShow.style.color = goalNotReached
+	if(inRange('protein', protein)) 
+		proteinShow.style.color = goalReached
+	else 
+		proteinShow.style.color = goalNotReached
 }
 function setGoal(){
 	let calories = document.querySelector('#caloriesGoal').value;
@@ -114,6 +132,12 @@ function addMeal(){
 	showGoal();
 	showEaten();
 }
+function delMeal(){
+	meals.pop();
+	checkGoal();
+	showGoal();
+	showEaten();
+}
 function inRange(type, number){
 	let value = goal[type];
 	return (value * 1.05 > number && value * 0.95 < number)
@@ -142,10 +166,12 @@ const submitGoal = document.querySelector('#submitGoal');
 const submitMeal = document.querySelector('#submitMeal');
 const showGoalButton = document.querySelector('#setGoal');
 const showMealButton = document.querySelector('#addMeal');
+const delMealButton = document.querySelector('#delMeal');
 submitGoal.addEventListener("click", function(){setGoal()});
 submitMeal.addEventListener("click", function(){addMeal()});
 showGoalButton.addEventListener("click", function(){showGoalForm()});
 showMealButton.addEventListener("click", function(){showMealForm()});
+delMealButton.addEventListener("click", function(){delMeal()});
 
 getValues()
 if(goal == null){
