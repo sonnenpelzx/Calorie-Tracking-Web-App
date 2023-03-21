@@ -1,3 +1,9 @@
+body{
+	max-width: 250px;
+	font-family: Arial, sans-serif;
+	margin: auto;
+	padding: 10px;
+}
 #forms{
 	position: relative;
 }
